@@ -31,7 +31,7 @@ Este projeto é uma **Calculadora Científica** desenvolvida com **HTML, CSS e J
 └── README.md
 ```
 
-## ⚙️ Como Funciona?
+## Como Funciona?
 
 ### HTML:
 
