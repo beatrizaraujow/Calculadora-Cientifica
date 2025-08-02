@@ -1,0 +1,96 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+    margin: 0%;
+    color: #333;
+}
+
+.calculator {
+    width: 320px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 12px 25px rgba( 0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.display {
+    background-color: #1e293b;
+    color: white;
+    padding: 20px;
+    text-align: right;
+    font-size: 2em;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.previous-operand {
+    font-size: 0.6em;
+    opacity: 0.8;
+    height: 20px;
+    overflow: hidden;
+}
+
+.current-operand {
+    font-size: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background-color: #ddd;
+}
+
+button {
+    border: none;
+    padding: 20px 0;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: white;
+}
+
+button:hover {
+    background-color: #f0f0f0;
+}
+
+button:active {
+    background-color: #e0e0e0;
+}
+
+.operator {
+    background-color: #e2e8f0;
+}
+
+.scientific {
+    background-color: #f1f5f9;
+    font-size: 1em;
+}
+
+.equals {
+    background-color: #3b82f6;
+    color: white;
+    grid-column: span 2;
+}
+
+.equals:hover {
+    background-color: #2563eb;
+}
+
+.clear {
+    background-color: #ef4444;
+    color: white;
+}
+
+.clear:hover {
+    background-color: #dc2626;
+}
