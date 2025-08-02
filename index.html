@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Científica</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="display">
+            <div class="previous-operand" id="previous-operand"></div>
+            <div class="current-operand" id="current-operand">0</div>
+        </div>
+        <div class="buttons">
+            <button class="clear" onclick="clearAll()">AC</button>
+            <button class="operator" onclick="deleteLast()">⌫</button>
+            <button class="operator" onclick="appendOperator('%')">%</button>
+            <button class="operator" onclick="appendOperator('/')">/</button>
+            
+            <button class="scientific" onclick="calculateFunction('Math.sin')">sin</button>
+            <button onclick="appendNumber('7')">7</button>
+            <button onclick="appendNumber('8')">8</button>
+            <button onclick="appendNumber('9')">9</button>
+            <button class="operator" onclick="appendOperator('*')">×</button>
+            
+            <button class="scientific" onclick="calculateFunction('Math.cos')">cos</button>
+            <button onclick="appendNumber('4')">4</button>
+            <button onclick="appendNumber('5')">5</button>
+            <button onclick="appendNumber('6')">6</button>
+            <button class="operator" onclick="appendOperator('-')">-</button>
+            
+            <button class="scientific" onclick="calculateFunction('Math.tan')">tan</button>
+            <button onclick="appendNumber('1')">1</button>
+            <button onclick="appendNumber('2')">2</button>
+            <button onclick="appendNumber('3')">3</button>
+            <button class="operator" onclick="appendOperator('+')">+</button>
+            
+            <button class="scientific" onclick="calculateFunction('Math.sqrt')">√</button>
+            <button onclick="appendNumber('0')">0</button>
+            <button onclick="appendNumber('.')">.</button>
+            <button class="equals" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <script>
+        let currentOperand = '0';
+        let previousOperand = '';
+        let operation = undefined;
+
+        const currentOperandElement = document.getElementById('current-operand');
+        const previousOperandElement = document.getElementById('previous-operand');
+
+        function updateDisplay() {
+            currentOperandElement.innerText = currentOperand;
+            previousOperandElement.innerText = previousOperand;
+        }
+
+        function appendNumber(number) {
+            if (number === '.' && currentOperand.includes('.')) return;
+            if (currentOperand === '0' && number !== '.') {
+                currentOperand = number;
+            } else {
+                currentOperand += number;
+            }
+            updateDisplay();
+        }
+
+        function appendOperator(operator) {
+            if (currentOperand === '') return;
+            if (previousOperand !== '') {
+                calculate();
+            }
+            operation = operator;
+            previousOperand = `${currentOperand} ${operation}`;
+            currentOperand = '';
+            updateDisplay();
+        }
+
+        function calculate() {
+            let computation;
+            const prev = parseFloat(previousOperand);
+            const current = parseFloat(currentOperand);
+            
+            if (isNaN(prev) || isNaN(current)) return;
+            
+            switch (operation) {
+                case '+':
+                    computation = prev + current;
+                    break;
+                case '-':
+                    computation = prev - current;
+                    break;
+                case '*':
+                    computation = prev * current;
+                    break;
+                case '/':
+                    computation = prev / current;
+                    break;
+                case '%':
+                    computation = prev % current;
+                    break;
+                default:
+                    return;
+            }
+            
+            currentOperand = computation.toString();
+            operation = undefined;
+            previousOperand = '';
+            updateDisplay();
+        }
+
+        function calculateFunction(func) {
+            const current = parseFloat(currentOperand);
+            if (isNaN(current)) return;
+            
+            let computation;
+            switch (func) {
+                case 'Math.sin':
+                    computation = Math.sin(current * Math.PI / 180); // converte para radianos
+                    break;
+                case 'Math.cos':
+                    computation = Math.cos(current * Math.PI / 180);
+                    break;
+                case 'Math.tan':
+                    computation = Math.tan(current * Math.PI / 180);
+                    break;
+                case 'Math.sqrt':
+                    computation = Math.sqrt(current);
+                    break;
+                default:
+                    return;
+            }
+            
+            currentOperand = computation.toString();
+            updateDisplay();
+        }
+
+        function clearAll() {
+            currentOperand = '0';
+            previousOperand = '';
+            operation = undefined;
+            updateDisplay();
+        }
+
+        function deleteLast() {
+            if (currentOperand.length === 1) {
+                currentOperand = '0';
+            } else {
+                currentOperand = currentOperand.slice(0, -1);
+            }
+            updateDisplay();
+        }
+
+        // Inicializa a calculadora
+        updateDisplay();
+    </script>
+</body>
+</html>
