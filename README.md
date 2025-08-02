@@ -16,7 +16,7 @@ Este projeto é uma **Calculadora Científica** desenvolvida com **HTML, CSS e J
 * Exibição do histórico da operação em andamento
 * Interface responsiva e estilizada com CSS moderno
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 * **HTML5**: Estruturação da calculadora e seus elementos.
 * **CSS3**: Estilização com grid layout para os botões, responsividade e efeitos de hover/active.
